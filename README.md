@@ -1,19 +1,22 @@
-vgod's vimrc
+radicalbit's vimrc
 ============
-Author: Tsung-Hsiang (Sean) Chang <vgod@vgod.tw>
+Originally forked from vgod's vimrc: https://github.com/vgod/vimrc
 
-Fork me on GITHUB  https://github.com/vgod/vimrc.
+Author: Axis Sivitz <aosivitz at gmail>
+
+Fork on GITHUB https://github.com/radicalbit/vimrc
+
 
 ONE-STEP INSTALL
 ----------------
 
 Use curl (for Mac OS X):
 
-     curl -o - https://raw.github.com/vgod/vimrc/master/auto-install.sh | sh
+     curl -o - https://raw.github.com/radicalbit/vimrc/master/auto-install.sh | sh
 
 or wget (for most UNIX platforms):
 
-     wget -O - https://raw.github.com/vgod/vimrc/master/auto-install.sh | sh
+     wget -O - https://raw.github.com/radicalbit/vimrc/master/auto-install.sh | sh
 
 
 MANUALLY INSTALL
@@ -21,7 +24,7 @@ MANUALLY INSTALL
 
 1. Check out from github
 
-        git clone git://github.com/vgod/vimrc.git ~/.vim
+        git clone git://github.com/radicalbit/vimrc.git ~/.vim
         cd ~/.vim
         git submodule update --init
 
@@ -42,7 +45,7 @@ MANUALLY INSTALL ON WINDOWS
 
         cd C:\Program Files\Vim   (or your installed path to Vim)
         rmdir /s vimfiles         (This deletes your old vim configurations. If you want to keep it, use move instead of rmdir.)
-        git clone git://github.com/vgod/vimrc.git vimfiles
+        git clone git://github.com/radicalbit/vimrc.git vimfiles
         git submodule update --init
 
 2. Install vimrc. Add the following line at the end of C:\Program Files\Vim\vimrc.
@@ -114,12 +117,6 @@ PLUGINS
 
 * [JavaComplete](http://www.vim.org/scripts/script.php?script_id=1785): Java Omni-completion.
 
-* [EasyMotion](https://github.com/Lokaltog/vim-easymotion): An easy way to jump to a word.
-
-  Useful commands:
-    * `,w` forward EasyMotion
-    * `,b` backward EasyMotion
-
 * [TagBar](http://majutsushi.github.com/tagbar/): browsing the tags of source files ordered by classes.
 
   Useful commands:
@@ -132,9 +129,3 @@ Language specific supports
 * Restructured Text: `ctrl-u 1~5` inserts Part/Chapter/Section headers
 * HTML, Javascript, Python, CSS, C, C++, Java: use `TAB` to do omni-completion.
 * HTML/XML: End tags are automatically completed after typing a begin tag. (Typing > twice pushes the end tag to a new line.)
-
-Other good references
----------------------
-
-* http://amix.dk/vim/vimrc.html
-* http://spf13.com/post/perfect-vimrc-vim-config-file
