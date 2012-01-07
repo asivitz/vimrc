@@ -109,6 +109,36 @@ endfun
 
 
 "--------------------------------------------------------------------------- 
+" OBJECTIVE-C
+"--------------------------------------------------------------------------- 
+function! ObjCTagJump()
+    "set lz
+    execute "normal mf\"fyi[`f"
+    let l:original = @f
+    let l:original = substitute(l:original, '\[.\{-}\]', "sqr", "g") 
+    let l:original = substitute(l:original, "\(.\{-}\)", "par", "g") 
+    let l:parts = split(l:original)
+
+    if len(l:parts) == 2
+        let l:result = l:parts[1]
+    else
+        let l:result = ""
+        for i in l:parts
+            if i =~ '\k\+:'
+                let items = split(i,":")
+                let l:result .= items[0] . ":"
+            endif
+        endfor
+    endif
+
+    execute 'tjump ' . l:result
+    normal zz
+endfunction
+
+nnoremap gx :call ObjCTagJump()<CR>
+
+
+"--------------------------------------------------------------------------- 
 " USEFUL SHORTCUTS
 "--------------------------------------------------------------------------- 
 " set leader to ,
@@ -120,7 +150,19 @@ map <leader>r :call Replace()<CR>
 
 "reload the config
 map <Leader>z :source $MYVIMRC<CR>
+
+"quick grep on all files
 map <Leader>f :vimgrep //gj *.mm<left><left><left><left><left><left><left><left>
+
+noremap 9 $
+noremap <Leader>e :call SyntaxAttr()<CR>
+noremap <Leader>l :ListMethods<CR>
+noremap <Leader>q <C-W><C-W>
+noremap <S-Down> <C-D>zz
+noremap <S-Up> <C-U>zz
+noremap <Leader>z :source $MYVIMRC<CR>
+noremap <Leader>f :vimgrep //gj *.mm<left><left><left><left><left><left><left><left>
+nmap <BACKSPACE> <C-o>
 
 " open the error console
 map <leader>cc :botright cope<CR> 
@@ -141,18 +183,6 @@ nmap <c-l> <c-w>l<c-w><bar>
 set wmw=0                     " set the min width of a window to 0 so we can maximize others 
 set wmh=0                     " set the min height of a window to 0 so we can maximize others
 " }
-
-" move around tabs. conflict with the original screen top/bottom
-" comment them out if you want the original H/L
-" go to prev tab 
-map <S-H> gT
-" go to next tab
-map <S-L> gt
-
-" new tab
-map <C-t><C-t> :tabnew<CR>
-" close tab
-map <C-t><C-w> :tabclose<CR> 
 
 " ,/ turn off search highlighting
 nmap <leader>/ :nohl<CR>
@@ -303,5 +333,8 @@ let g:SuperTabDefaultCompletionType = "context"
 nnoremap <silent> <F7> :TagbarToggle<CR> 
 " set focus to TagBar when opening it
 let g:tagbar_autofocus = 1
+
+" --- NERD_commenter
+map - <Leader>c<Space>
 
 
