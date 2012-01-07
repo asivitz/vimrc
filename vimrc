@@ -1,9 +1,5 @@
-" vgod's vimrc
-" Tsung-Hsiang (Sean) Chang <vgod@vgod.tw>
-" Fork me on GITHUB  https://github.com/vgod/vimrc
-
-" read https://github.com/vgod/vimrc/blob/master/README.md for more info
-
+" radicalbit's vimrc
+" forked from vgod (https://github.com/vgod/vimrc)
 
 " For pathogen.vim: auto load all plugins in .vim/bundle
 call pathogen#runtime_append_all_bundles()
@@ -31,7 +27,7 @@ syntax on		" syntax highlight
 set hlsearch		" search highlighting
 
 if has("gui_running")	" GUI color and font settings
-  set guifont=Osaka-Mono:h20
+  set guifont=ocra10:h12
   set background=dark 
   set t_Co=256          " 256 color mode
   set cursorline        " highlight current line
@@ -122,6 +118,10 @@ let g:mapleader=","
 "replace the current word in all opened buffers
 map <leader>r :call Replace()<CR>
 
+"reload the config
+map <Leader>z :source $MYVIMRC<CR>
+map <Leader>f :vimgrep //gj *.mm<left><left><left><left><left><left><left><left>
+
 " open the error console
 map <leader>cc :botright cope<CR> 
 " move to next error
@@ -195,7 +195,7 @@ cmap cd. lcd %:p:h
 "--------------------------------------------------------------------------- 
 
 " Ctrl-[ jump out of the tag stack (undo Ctrl-])
-map <C-[> <ESC>:po<CR>
+map <BACKSPACE> <ESC>:po<CR>
 
 " ,g generates the header guard
 map <leader>g :call IncludeGuard()<CR>
@@ -297,12 +297,6 @@ let g:CommandTMaxHeight = 15
 
 " --- SuperTab
 let g:SuperTabDefaultCompletionType = "context"
-
-" --- EasyMotion
-"let g:EasyMotion_leader_key = '<Leader>m' " default is <Leader>w
-hi link EasyMotionTarget ErrorMsg
-hi link EasyMotionShade  Comment
-
 
 " --- TagBar
 " toggle TagBar with F7
