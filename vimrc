@@ -53,10 +53,11 @@ set copyindent		" copy the previous indentation on autoindenting
 set ignorecase		" ignore case when searching
 set smartcase		" ignore case if search pattern is all lowercase,case-sensitive otherwise
 set smarttab		" insert tabs on the start of a line according to context
+set hidden
 
 " disable sound on errors
 set noerrorbells
-set novisualbell
+set vb
 set t_vb=
 set tm=500
 
@@ -149,7 +150,7 @@ let g:mapleader=","
 map <leader>r :call Replace()<CR>
 
 "reload the config
-map <Leader>z :source $MYVIMRC<CR>
+noremap <Leader>z :source $MYVIMRC<CR>:echom "~/.vimrc reloaded"<CR>
 
 "quick grep on all files
 map <Leader>f :vimgrep //gj *.mm<left><left><left><left><left><left><left><left>
@@ -160,7 +161,6 @@ noremap <Leader>l :ListMethods<CR>
 noremap <Leader>q <C-W><C-W>
 noremap <S-Down> <C-D>zz
 noremap <S-Up> <C-U>zz
-noremap <Leader>z :source $MYVIMRC<CR>
 noremap <Leader>f :vimgrep //gj *.mm<left><left><left><left><left><left><left><left>
 nmap <BACKSPACE> <C-o>
 
@@ -336,5 +336,8 @@ let g:tagbar_autofocus = 1
 
 " --- NERD_commenter
 map - <Leader>c<Space>
+
+" --- EasyMotion
+let g:EasyMotion_leader_key = '<Leader>m'
 
 
