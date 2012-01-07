@@ -32,6 +32,7 @@ if has("gui_running")	" GUI color and font settings
   set t_Co=256          " 256 color mode
   set cursorline        " highlight current line
   colors moria
+  hi LineNr guifg=#333333 gui=none
 else
 " terminal color settings
   colors vgod
@@ -54,6 +55,7 @@ set ignorecase		" ignore case when searching
 set smartcase		" ignore case if search pattern is all lowercase,case-sensitive otherwise
 set smarttab		" insert tabs on the start of a line according to context
 set hidden
+set number
 
 " disable sound on errors
 set noerrorbells
