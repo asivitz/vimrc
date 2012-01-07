@@ -2,7 +2,7 @@ radicalbit's vimrc
 ============
 Originally forked from vgod's vimrc: https://github.com/vgod/vimrc
 
-Author: Axis Sivitz <aosivitz at gmail>
+Author: Axis Sivitz [aosivitz at gmail]
 
 Fork on GITHUB https://github.com/radicalbit/vimrc
 
