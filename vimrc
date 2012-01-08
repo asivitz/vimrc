@@ -59,7 +59,7 @@ set number
 
 " disable sound on errors
 set noerrorbells
-set vb
+set vb " this removes the bells on MacVim
 set t_vb=
 set tm=500
 
@@ -149,13 +149,18 @@ let mapleader=","
 let g:mapleader=","
 
 "replace the current word in all opened buffers
-map <leader>r :call Replace()<CR>
+"noremap <leader>r :call Replace()<CR>
 
 "reload the config
 noremap <Leader>z :source $MYVIMRC<CR>:echom "~/.vimrc reloaded"<CR>
 
 "quick grep on all files
-map <Leader>f :vimgrep //gj *.mm<left><left><left><left><left><left><left><left>
+noremap <Leader>f :vimgrep //gj *.mm<left><left><left><left><left><left><left><left>
+
+"quick substitution
+noremap <Leader>r :exe :%s/\<\=expand('<cword>')
+". expand('<cword>') .  '\>//g<left><left><left><left><left>'
+    ":exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge' 
 
 noremap 9 $
 noremap <Leader>e :call SyntaxAttr()<CR>
@@ -167,17 +172,17 @@ noremap <Leader>f :vimgrep //gj *.mm<left><left><left><left><left><left><left><l
 nmap <BACKSPACE> <C-o>
 
 " open the error console
-map <leader>cc :botright cope<CR> 
+noremap <leader>cc :botright cope<CR> 
 " move to next error
-map <leader>] :cn<CR>
+noremap <leader>] :cn<CR>
 " move to the prev error
-map <leader>[ :cp<CR>
+noremap <leader>[ :cp<CR>
 
 " --- move around splits {
 " move to and maximize the below split 
-map <C-J> <C-W>j<C-W>_
+noremap <C-J> <C-W>j<C-W>_
 " move to and maximize the above split 
-map <C-K> <C-W>k<C-W>_
+noremap <C-K> <C-W>k<C-W>_
 " move to and maximize the left split 
 nmap <c-h> <c-w>h<c-w><bar>
 " move to and maximize the right split  
@@ -227,10 +232,10 @@ cmap cd. lcd %:p:h
 "--------------------------------------------------------------------------- 
 
 " Ctrl-[ jump out of the tag stack (undo Ctrl-])
-map <BACKSPACE> <ESC>:po<CR>
+noremap <BACKSPACE> <ESC>:po<CR>
 
 " ,g generates the header guard
-map <leader>g :call IncludeGuard()<CR>
+noremap <leader>g :call IncludeGuard()<CR>
 fun! IncludeGuard()
    let basename = substitute(bufname(""), '.*/', '', '')
    let guard = '_' . substitute(toupper(basename), '\.', '_', "H")
@@ -306,24 +311,6 @@ let g:tex_flavor='latex'
 
 "}
 
-
-" --- AutoClose - Inserts matching bracket, paren, brace or quote 
-" fixed the arrow key problems caused by AutoClose
-if !has("gui_running")	
-   set term=linux
-   imap OA <ESC>ki
-   imap OB <ESC>ji
-   imap OC <ESC>li
-   imap OD <ESC>hi
-
-   nmap OA k
-   nmap OB j
-   nmap OC l
-   nmap OD h
-endif
-
-
-
 " --- Command-T
 let g:CommandTMaxHeight = 15
 
@@ -337,7 +324,7 @@ nnoremap <silent> <F7> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 " --- NERD_commenter
-map - <Leader>c<Space>
+noremap - <Leader>c<Space>
 
 " --- EasyMotion
 let g:EasyMotion_leader_key = '<Leader>m'
