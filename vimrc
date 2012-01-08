@@ -158,9 +158,7 @@ noremap <Leader>z :source $MYVIMRC<CR>:echom "~/.vimrc reloaded"<CR>
 noremap <Leader>f :vimgrep //gj *.mm<left><left><left><left><left><left><left><left>
 
 "quick substitution
-noremap <Leader>r :exe :%s/\<\=expand('<cword>')
-". expand('<cword>') .  '\>//g<left><left><left><left><left>'
-    ":exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge' 
+noremap <Leader>r :%s/\<<C-R><C-W>\>//ge<left><left><left>
 
 noremap 9 $
 noremap <Leader>e :call SyntaxAttr()<CR>
@@ -324,7 +322,7 @@ nnoremap <silent> <F7> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 " --- NERD_commenter
-noremap - <Leader>c<Space>
+map - <Leader>c<Space>
 
 " --- EasyMotion
 let g:EasyMotion_leader_key = '<Leader>m'
