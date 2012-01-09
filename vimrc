@@ -334,5 +334,3 @@ map - <Leader>c<Space>
 
 " --- EasyMotion
 let g:EasyMotion_leader_key = '<Leader>m'
-
-

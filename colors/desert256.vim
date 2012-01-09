@@ -291,6 +291,11 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("PmenuSel", "000000", "63B3FF", "")
     call <SID>X("SpellBad", "000000", "63B3FF", "")
 
+    call <SID>X("punctuation", "0071DB", "", "")
+    call <SID>X("objcMethodParens", "56CC63", "", "")
+    call <SID>X("parens", "56CC63", "", "")
+    call <SID>X("braces", "0071DB", "", "")
+
     " delete functions {{{
     delf <SID>X
     delf <SID>rgb

@@ -163,3 +163,8 @@ elseif s:moria_style == "light"
     hi htmlBoldUnderlineItalic guibg=bg guifg=fg gui=bold,underline,italic
     hi htmlUnderlineItalic guibg=bg guifg=fg gui=underline,italic
 endif
+
+hi punctuation guifg=#0071DB
+hi objcMethodParens guifg=#56CC63
+hi parens guifg=#56CC63
+hi braces guifg=#0071DB

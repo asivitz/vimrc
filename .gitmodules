@@ -55,3 +55,6 @@
 [submodule "bundle/vim-gnupg"]
 	path = bundle/vim-gnupg
 	url = git://gitorious.org/vim-gnupg/vim-gnupg.git
+[submodule "bundle/cocoa"]
+	path = bundle/cocoa
+	url = git@github.com:radicalbit/cocoa.vim.git
