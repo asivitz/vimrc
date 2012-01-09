@@ -210,6 +210,8 @@ nmap <leader>p :set paste!<BAR>set paste?<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+map Y y$
+
 " :cd. change working directory to that of the current file
 cmap cd. lcd %:p:h
 
