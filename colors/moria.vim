@@ -74,11 +74,11 @@ if s:moria_style == "dark"
     hi Comment guibg=bg guifg=#d0d0a0 gui=none
     hi Constant guibg=bg guifg=#87df71 gui=none
     hi Error guibg=bg guifg=#ee2c2c gui=none
-    hi Identifier guibg=bg guifg=#7ee0ce gui=none
+    hi Identifier guibg=bg guifg=#d7a0d7 gui=none
     hi Ignore guibg=bg guifg=bg gui=none
     hi lCursor guibg=#00e700 guifg=#000000 gui=none
     hi MatchParen guibg=#008b8b gui=none
-    hi PreProc guibg=bg guifg=#d7a0d7 gui=none
+    hi PreProc guibg=bg guifg=#7ee0ce gui=none
     hi Special guibg=bg guifg=#e0c07e gui=none
     hi Statement guibg=bg guifg=#7ec0ee gui=none
     hi Todo guibg=#e0e000 guifg=#000000 gui=none
@@ -163,8 +163,3 @@ elseif s:moria_style == "light"
     hi htmlBoldUnderlineItalic guibg=bg guifg=fg gui=bold,underline,italic
     hi htmlUnderlineItalic guibg=bg guifg=fg gui=underline,italic
 endif
-
-hi punctuation guifg=#0071DB
-hi objcMethodParens guifg=#56CC63
-hi parens guifg=#56CC63
-hi braces guifg=#0071DB

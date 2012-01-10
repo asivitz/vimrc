@@ -6,6 +6,8 @@ Author: Axis Sivitz [aosivitz at gmail]
 
 Fork on GITHUB https://github.com/radicalbit/vimrc
 
+This configuration focuses on Objective-C
+
 
 ONE-STEP INSTALL
 ----------------
@@ -84,7 +86,7 @@ PLUGINS
     * `:Bookmark [name]` - bookmark any directory as name
     * `:NERDTree [name]` - open the bookmark [name] in Nerd Tree
 
-* [Cocoa](https://github.com/radicalbit/cocoa.vim forked from msanders/cocoa.vim) Syntax hilighting for Objective-C
+* [Cocoa](https://github.com/radicalbit/cocoa.vim forked from msanders/cocoa.vim) Syntax highlighting for Objective-C
 
 * [vim-surround](https://github.com/tpope/vim-surround/blob/master/doc/surround.txt): deal with pairs of surroundings.
 

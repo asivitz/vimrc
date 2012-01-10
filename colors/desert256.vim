@@ -281,7 +281,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("Statement", "FFFDB9", "", "bold")
     call <SID>X("PreProc", "cd5c5c", "", "")
     call <SID>X("Type", "bdb76b", "", "bold")
-    call <SID>X("Special", "ffdead", "", "")
+    call <SID>X("Special", "56CC63", "", "")
     "Underlined
     call <SID>X("Ignore", "666666", "", "")
     "Error
@@ -290,11 +290,6 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("Pmenu", "", "424242", "")
     call <SID>X("PmenuSel", "000000", "63B3FF", "")
     call <SID>X("SpellBad", "000000", "63B3FF", "")
-
-    call <SID>X("punctuation", "0071DB", "", "")
-    call <SID>X("objcMethodParens", "56CC63", "", "")
-    call <SID>X("parens", "56CC63", "", "")
-    call <SID>X("braces", "0071DB", "", "")
 
     " delete functions {{{
     delf <SID>X
