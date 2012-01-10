@@ -84,7 +84,7 @@ PLUGINS
     * `:Bookmark [name]` - bookmark any directory as name
     * `:NERDTree [name]` - open the bookmark [name] in Nerd Tree
 
-* [AutoClose](http://www.vim.org/scripts/script.php?script_id=1849):  Inserts matching bracket, paren, brace or quote.
+* [Cocoa](https://github.com/radicalbit/cocoa.vim forked from msanders/cocoa.vim) Syntax hilighting for Objective-C
 
 * [vim-surround](https://github.com/tpope/vim-surround/blob/master/doc/surround.txt): deal with pairs of surroundings.
 
