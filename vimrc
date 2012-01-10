@@ -123,7 +123,11 @@ function! ObjCTagJump()
     let l:parts = split(l:original)
 
     if len(l:parts) == 2
-        let l:result = l:parts[1]
+       let l:result = l:parts[1]
+       if l:parts[1] =~ '\k\+:'
+          let items = split(l:parts[1],":")
+          let l:result = items[0] . ":"
+       endif
     else
         let l:result = ""
         for i in l:parts
