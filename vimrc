@@ -21,6 +21,11 @@ filetype plugin on    " Enable filetype-specific plugins
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
+augroup whitespace
+   au!
+   autocmd FileType objc,objcpp autocmd BufWritePre <buffer> :%s/\s\+$//e
+augroup END
+
 
 syntax on		" syntax highlight
 set hlsearch		" search highlighting
@@ -36,6 +41,10 @@ else
   colors desert256
 endif
 
+" set leader to ,
+let mapleader=","
+let g:mapleader=","
+
 hi LineNr ctermfg=darkgray guifg=#555555 gui=none
 
 set clipboard=unnamed	" yank to the system register (*) by default
@@ -45,16 +54,17 @@ set wildchar=<TAB>	" start wild expansion in the command line using <TAB>
 set wildmenu            " wild char completion menu
 
 " ignore these files while expanding wild chars
-set wildignore=*.o,*.class,*.pyc
+set wildignore=*.o,*.class,*.pyc,build/**,*.xcodeproj/**
 
-set autoindent		" auto indentation
+"set smartindent
+"set autoindent		" auto indentation
 set incsearch		" incremental search
 set nobackup		" no *~ backup files
 set copyindent		" copy the previous indentation on autoindenting
 set ignorecase		" ignore case when searching
 set smartcase		" ignore case if search pattern is all lowercase,case-sensitive otherwise
 set smarttab		" insert tabs on the start of a line according to context
-set hidden
+"set hidden
 set number
 
 " disable sound on errors
@@ -95,7 +105,7 @@ endfunction
 
 
 " C/C++ specific settings
-autocmd FileType c,cpp,cc  set cindent comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30
+"autocmd FileType c,cpp,cc set cindent comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30
 
 "Restore cursor to file position in previous editing session
 set viminfo='10,\"100,:20,%,n~/.viminfo
@@ -144,13 +154,37 @@ endfunction
 
 nnoremap gx :call ObjCTagJump()<CR>
 
+" When on a member declaration line, add a matching property line below
+function! ObjCMakeProperty()
+   execute "normal mf\"fyy"
+   execute "normal /}\<CR>"
+   execute "normal /^\s*$\<CR>"
+   execute "normal \"fp=="
+
+   let l:parts = split(@f)
+   let l:type = l:parts[0]
+   execute "normal I@property \<ESC>"
+   if @f =~ '\*'
+      execute "normal a(nonatomic, retain) \<ESC>"
+   endif
+   nohl
+   execute "normal `f"
+endfunction
+
+nnoremap <Leader>v :call ObjCMakeProperty()<CR>
+
+" When on a class name, add a matching import
+function! ObjCMakeImport()
+   execute "normal mf\"fyaw"
+   execute "normal ?import\<CR>"
+   execute "normal o#import \"\<ESC>\"fps.h\"\<ESC>"
+endfunction
+
+nnoremap <Leader>i :call ObjCMakeImport()<CR>
 
 "---------------------------------------------------------------------------
 " USEFUL SHORTCUTS
 "---------------------------------------------------------------------------
-" set leader to ,
-let mapleader=","
-let g:mapleader=","
 
 "replace the current word in all opened buffers
 "noremap <leader>r :call Replace()<CR>
@@ -170,6 +204,8 @@ noremap <Leader>l :ListMethods<CR>
 noremap <Leader>q <C-W><C-W>
 noremap <S-Down> <C-D>zz
 noremap <S-Up> <C-U>zz
+noremap <C-J> <C-D>zz
+noremap <C-K> <C-U>zz
 noremap <Leader>f :vimgrep //gj *.mm<left><left><left><left><left><left><left><left>
 nmap <BACKSPACE> <C-o>
 
@@ -184,13 +220,13 @@ noremap <leader>[ :cp<CR>
 
 " --- move around splits {
 " move to and maximize the below split
-noremap <C-J> <C-W>j<C-W>_
+"noremap <C-J> <C-W>j<C-W>_
 " move to and maximize the above split
-noremap <C-K> <C-W>k<C-W>_
+"noremap <C-K> <C-W>k<C-W>_
 " move to and maximize the left split
-nmap <c-h> <c-w>h<c-w><bar>
+"nmap <c-h> <c-w>h<c-w><bar>
 " move to and maximize the right split
-nmap <c-l> <c-w>l<c-w><bar>
+"nmap <c-l> <c-w>l<c-w><bar>
 set wmw=0                     " set the min width of a window to 0 so we can maximize others
 set wmh=0                     " set the min height of a window to 0 so we can maximize others
 " }
@@ -213,7 +249,7 @@ nmap <leader>p :set paste!<BAR>set paste?<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-map Y y$
+noremap Y y$
 
 " :cd. change working directory to that of the current file
 cmap cd. lcd %:p:h
@@ -324,11 +360,11 @@ let g:tex_flavor='latex'
 let g:CommandTMaxHeight = 15
 
 " --- SuperTab
-"let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = "<c-p>"
 "let g:SuperTabMappingForward = '<c-tab>'
 
 " --- SnipMate
-"let g:snips_trigger_key='<c-space>'
+let g:snips_trigger_key='<c-space>'
 
 " --- TagBar
 " toggle TagBar with F7

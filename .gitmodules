@@ -13,9 +13,6 @@
 [submodule "bundle/CuteErrorMarker"]
 	path = bundle/CuteErrorMarker
 	url = https://github.com/Twinside/vim-cuteErrorMarker.git
-[submodule "bundle/yankring"]
-	path = bundle/yankring
-	url = https://github.com/vim-scripts/YankRing.vim.git
 [submodule "bundle/VisIncr"]
 	path = bundle/VisIncr
 	url = https://github.com/vim-scripts/VisIncr.git
@@ -67,3 +64,6 @@
 [submodule "bundle/snipmate-snippets"]
 	path = bundle/snipmate-snippets
 	url = https://github.com/honza/snipmate-snippets.git
+[submodule "bundle/vim-objc"]
+	path = bundle/vim-objc
+	url = https://github.com/b4winckler/vim-objc.git

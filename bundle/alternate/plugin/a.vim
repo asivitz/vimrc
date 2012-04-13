@@ -86,7 +86,7 @@ call <SID>AddAlternateExtensionMapping('CXX',"H")
 " Mappings for Obj-C
 call <SID>AddAlternateExtensionMapping('h',"m,mm")
 call <SID>AddAlternateExtensionMapping('m',"h")
-call <SID>AddAlternateExtensionMapping('mm',"h")
+call <SID>AddAlternateExtensionMapping('mm',"h,hh")
 " Mappings for PSL7
 call <SID>AddAlternateExtensionMapping('psl',"ph")
 call <SID>AddAlternateExtensionMapping('ph',"psl")
