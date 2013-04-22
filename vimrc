@@ -182,6 +182,25 @@ endfunction
 
 nnoremap <Leader>i :call ObjCMakeImport()<CR>
 
+" When on a define-type line, insert all the gambit scheme method symbols
+" (define-type TypeName mema memb memc)
+function! GambitMakeTypeSymbols()
+   execute "normal mf\"fdd"
+   let l:clean = substitute(@f, "\(", " ", "g")
+   let l:clean = substitute(l:clean, "\)", "", "")
+   let l:parts = split(l:clean)
+   let @g = l:parts[1]
+   execute "normal \"gPa? make-\<ESC>\"gp$a \<ESC>"
+   let i = 2
+   while i < len(l:parts)
+      let @h = l:parts[i]
+      execute "normal \"gp$a-\<ESC>\"hpa \<ESC>\"gpa-\<ESC>\"hpa-set!\<ESC>"
+      let i += 1
+   endwhile
+endfunction
+
+nnoremap <Leader>t :call GambitMakeTypeSymbols()<CR>
+
 "---------------------------------------------------------------------------
 " USEFUL SHORTCUTS
 "---------------------------------------------------------------------------
