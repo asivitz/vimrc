@@ -1,6 +1,8 @@
 " radicalbit's vimrc
 " forked from vgod (https://github.com/vgod/vimrc)
 
+filetype off
+set nocompatible
 " For pathogen.vim: auto load all plugins in .vim/bundle
 call pathogen#infect()
 
