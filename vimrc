@@ -6,6 +6,8 @@ call pathogen#infect()
 
 " General Settings
 
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
 set nocompatible	" not compatible with the old-fashion vi mode
 set bs=2		" allow backspacing over everything in insert mode
 set history=50		" keep 50 lines of command line history
@@ -185,21 +187,21 @@ nnoremap <Leader>i :call ObjCMakeImport()<CR>
 " When on a define-type line, insert all the gambit scheme method symbols
 " (define-type TypeName mema memb memc)
 function! GambitMakeTypeSymbols()
-   execute "normal mf\"fdd"
+   execute "normal mf^\"fd$"
    let l:clean = substitute(@f, "\(", " ", "g")
    let l:clean = substitute(l:clean, "\)", "", "")
    let l:parts = split(l:clean)
    let @g = l:parts[1]
-   execute "normal \"gPa? make-\<ESC>\"gp$a \<ESC>"
+   execute "normal \"gPa? make-\<ESC>\"gp"
    let i = 2
    while i < len(l:parts)
       let @h = l:parts[i]
-      execute "normal \"gp$a-\<ESC>\"hpa \<ESC>\"gpa-\<ESC>\"hpa-set!\<ESC>"
+      execute "normal $a \<ESC>\"gp$a-\<ESC>\"hpa \<ESC>\"gpa-\<ESC>\"hpa-set!\<ESC>"
       let i += 1
    endwhile
 endfunction
 
-nnoremap <Leader>t :call GambitMakeTypeSymbols()<CR>
+nnoremap <Leader>j :call GambitMakeTypeSymbols()<CR>
 
 "---------------------------------------------------------------------------
 " USEFUL SHORTCUTS
@@ -396,3 +398,7 @@ map - <Leader>c<Space>
 
 " --- EasyMotion
 let g:EasyMotion_leader_key = '<Leader>m'
+
+autocmd FileType scheme :call TurnOnSchemeFolding()
+"autocmd FileType scheme :call RainbowParenthesesToggleAll()
+autocmd FileType scheme :call rainbow_parentheses#toggleall()
