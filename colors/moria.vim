@@ -92,6 +92,10 @@ if s:moria_style == "dark"
     hi htmlBoldUnderline ctermbg=0 ctermfg=15 guibg=bg guifg=fg gui=bold,underline
     hi htmlBoldUnderlineItalic ctermbg=0 ctermfg=15 guibg=bg guifg=fg gui=bold,underline,italic
     hi htmlUnderlineItalic ctermbg=0 ctermfg=15 guibg=bg guifg=fg gui=underline,italic
+    hi ShowMarksHLl guifg=#ff7500 ctermfg=58 gui=none
+    hi ShowMarksHLu guifg=#ff7500  ctermfg=58 gui=none
+    hi ShowMarksHLo guifg=#ff7500  ctermfg=58 gui=none
+    hi ShowMarksHLm guifg=#ff7500  ctermfg=58 gui=none
 elseif s:moria_style == "light"
     hi Normal ctermbg=15 ctermfg=0 guibg=#ffffff guifg=#000000 gui=none
 

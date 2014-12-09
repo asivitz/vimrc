@@ -290,6 +290,9 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("Pmenu", "", "424242", "")
     call <SID>X("PmenuSel", "000000", "63B3FF", "")
     call <SID>X("SpellBad", "000000", "63B3FF", "")
+    call <SID>X("SpellCap", "000000", "BBBBBB", "")
+    call <SID>X("Error", "000000", "63B3FF", "")
+    call <SID>X("schemeError", "cccccc", "", "")
 
     " delete functions {{{
     delf <SID>X
@@ -337,7 +340,12 @@ else
     hi Type          ctermfg=2
     hi Underlined    cterm=underline ctermfg=5
     hi Ignore        ctermfg=darkgrey
-    hi Error         cterm=bold ctermfg=7 ctermbg=1
+    hi Error         cterm=bold ctermfg=7 ctermbg=1 guibg=none
+    hi ShowMarksHLl guifg=#ff7500 ctermfg=58 ctermbg=0 gui=none
+    hi ShowMarksHLu guifg=#ff7500 ctermfg=58 ctermbg=0 gui=none
+    hi ShowMarksHLo guifg=#ff7500 ctermfg=58 ctermbg=0 gui=none
+    hi ShowMarksHLm guifg=#ff7500 ctermfg=58 ctermbg=0 gui=none
+
 endif
 
 

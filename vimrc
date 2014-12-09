@@ -1,8 +1,10 @@
 " radicalbit's vimrc
 " forked from vgod (https://github.com/vgod/vimrc)
 
-filetype off
-set nocompatible
+if has("gui_running")	" GUI color and font settings
+else
+let loaded_showmarks = 1 " don't use showmarks in a terminal
+endif
 " For pathogen.vim: auto load all plugins in .vim/bundle
 call pathogen#infect()
 
@@ -39,15 +41,19 @@ if has("gui_running")	" GUI color and font settings
   set background=dark
   set t_Co=256          " 256 color mode
   set cursorline        " highlight current line
+  let g:showmarks_enable=1
   colors moria
 else
 " terminal color settings
   colors desert256
+  let g:showmarks_enable=0
 endif
 
 " set leader to ,
 let mapleader=","
 let g:mapleader=","
+let maplocalleader=","
+let g:maplocalleader=","
 
 hi LineNr ctermfg=darkgray guifg=#555555 gui=none
 
@@ -58,7 +64,7 @@ set wildchar=<TAB>	" start wild expansion in the command line using <TAB>
 set wildmenu            " wild char completion menu
 
 " ignore these files while expanding wild chars
-set wildignore=*.o,*.class,*.pyc,build/**,*.xcodeproj/**
+set wildignore=*.o,*.class,*.pyc,build/**,*.xcodeproj/**,*.m,*.hi,*.png,*.dyn_hi,*.dyn_o
 
 "set smartindent
 "set autoindent		" auto indentation
@@ -67,7 +73,6 @@ set nobackup		" no *~ backup files
 set copyindent		" copy the previous indentation on autoindenting
 set ignorecase		" ignore case when searching
 set smartcase		" ignore case if search pattern is all lowercase,case-sensitive otherwise
-set smarttab		" insert tabs on the start of a line according to context
 "set hidden
 set number
 
@@ -78,9 +83,17 @@ set t_vb=
 set tm=500
 
 " TAB setting{
-   set expandtab        "replace <TAB> with spaces
-   set softtabstop=3
-   set shiftwidth=3
+   "set expandtab        "replace <TAB> with spaces
+   "set softtabstop=3
+   "set shiftwidth=3
+
+   set tabstop=8                   "A tab is 8 spaces
+   set expandtab                   "Always uses spaces instead of tabs
+   set softtabstop=4               "Insert 4 spaces when tab is pressed
+   set shiftwidth=4                "An indent is 4 spaces
+   set smarttab                    "Indent instead of tab at start of line
+   set shiftround                  "Round spaces to nearest shiftwidth multiple
+   set nojoinspaces                "Don't convert spaces to tabs
 
    au FileType Makefile set noexpandtab
 "}
@@ -205,6 +218,20 @@ endfunction
 
 nnoremap <Leader>j :call GambitMakeTypeSymbols()<CR>
 
+function! SwitchGambitHeader()
+   let l:filename = @%
+   let l:idx = stridx(l:filename, "#")
+   if l:idx > -1
+      let l:af = substitute(l:filename, "\\#", "", "")
+      execute "edit " . l:af
+   else
+      let l:af = substitute(l:filename, "\\.", "\\\\#\.", "")
+      execute "edit " . l:af
+   endif
+endfunction
+nnoremap <Leader>a :call SwitchGambitHeader()<CR>
+
+
 "---------------------------------------------------------------------------
 " USEFUL SHORTCUTS
 "---------------------------------------------------------------------------
@@ -240,6 +267,9 @@ noremap <leader>cc :botright cope<CR>
 noremap <leader>] :cn<CR>
 " move to the prev error
 noremap <leader>[ :cp<CR>
+
+noremap g= mfgg=G`f
+
 
 " --- move around splits {
 " move to and maximize the below split
@@ -299,6 +329,41 @@ cmap cd. lcd %:p:h
 " PROGRAMMING SHORTCUTS
 "---------------------------------------------------------------------------
 
+:cmap acks Ack --haskell
+
+nnoremap <leader>d :GhcModType<CR>
+"nnoremap <leader>d :call JumpToSchemeDefinition()<CR>
+nnoremap <leader>s :call SearchSchemeUse()<CR>
+nnoremap <leader>f :call SearchStringSchemeUse()<CR>
+
+fun! JumpToSchemeDefinition()
+   "let l:info = system("ag --scheme --nocolor --nogroup --column \"\\(define[\w-]* \\(?" . escape(expand('<cword>'), '#|') . "[^\-]\"")
+   let l:info = system("ag --scheme --nocolor --nogroup --column \"\\(define[\w-]* \\(?" . escape(expand('<cword>'), '#|') . "[^\w-]\"")
+   let l:info = substitute(l:info, '\n$', '', '')
+
+   "let l:info = system("echo hi")
+   "echom l:info
+   execute "cexpr \"" . l:info . "\""
+endfun
+
+fun! ShowSchemeDefinition()
+   let l:info = system("ag --scheme -h --nocolor \"\\(define[\w-]* \\(?" . escape(expand('<cword>'), '#|') . "\\)? ?$?\"")
+   echom l:info
+endfun
+
+fun! SearchSchemeUse()
+   let l:keyword = escape(expand('<cword>'), '#|')
+   "echom l:keyword
+   execute "ag --scheme \"" . l:keyword . "\""
+   "let l:result = system("ag --scheme --nocolor --nogroup \"" . l:keyword . "\"")
+   "execute "cexpr \"" . l:result . "\""
+endfun
+
+fun! SearchStringSchemeUse()
+    let s:word = input("Scheme search: ")
+    execute "ag --scheme --nocolor \"" . s:word . "\""
+endfun
+
 " Ctrl-[ jump out of the tag stack (undo Ctrl-])
 noremap <BACKSPACE> <ESC>:po<CR>
 
@@ -311,7 +376,6 @@ fun! IncludeGuard()
    call append(1, "#define " . guard)
    call append( line("$"), "#endif // for #ifndef " . guard)
 endfun
-
 
 
 " Enable omni completion. (Ctrl-X Ctrl-O)
@@ -399,8 +463,30 @@ let g:tagbar_autofocus = 1
 map - <Leader>c<Space>
 
 " --- EasyMotion
+"let g:EasyMotion_leader_key = '<Space>'
 let g:EasyMotion_leader_key = '<Leader>m'
+nmap <Space> <Leader>m
+
+" --- vim-sexp
+let g:sexp_enable_insert_mode_mappings=0
+nmap <C-l> <Plug>sexp_swap_element_forward
+nmap <C-h> <Plug>sexp_swap_element_backward
 
 autocmd FileType scheme :call TurnOnSchemeFolding()
 "autocmd FileType scheme :call RainbowParenthesesToggleAll()
-autocmd FileType scheme :call rainbow_parentheses#toggleall()
+"autocmd FileType scheme :call rainbow_parentheses#toggleall()
+
+let g:haskell_conceal = 0
+
+let g:showmarks_textlower    = "\t"
+let g:showmarks_textupper    = "\t"
+let g:showmarks_textother    = "  "
+
+let g:syntastic_haskell_hdevtools_args = '-g-i/Users/axis/Development/haskell/Games/Hickory/ -g-L/Users/axis/Development/haskell/Games/Hickory/ -g-Wall -g-fno-warn-unused-matches -g-fno-warn-missing-signatures -g-fno-warn-unused-do-bind'
+let g:syntastic_haskell_checkers = ['hdevtools']
+let g:syntastic_always_populate_loc_list = 1
+"let g:ghcmod_ghc_options = ['-i/Users/axis/Development/haskell/crater/', '-L/Users/axis/Development/haskell/crater/']
+
+"let g:hdevtools_options = '-g-i/Users/axis/Development/haskell/crater/ -g-Wall -g -hide-package -g transformers'
+
+au BufRead * normal zR
